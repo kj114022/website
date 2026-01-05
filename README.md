@@ -6,7 +6,7 @@ A specialized presence site for high-assurance, mission-critical systems enginee
 
 ## Philosophy
 *   **Zero-JS Architecture**: 100% deterministic rendering. No runtime variables, no client-side scripting risks, no dependency supply chain attacks.
-*   **Defense & Aerospace Focus**: Messaging tailored for adversarial environments, real-time systems (RTOS), and formal verification.
+*   **High-Assurance Engineering**: Focused on adversarial environments, real-time constraints (RTOS), and formal verification where failure is not an option.
 *   **Correctness First**: Style and function are derived from constraints, not trends.
 
 ## Features
