@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Inter:wght@400;600&display=swap');
+
+:root {
+    --bg-color: #ffffff;
+    --text-color: #1a1a1a;
+    --accent-color: #333333;
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'Cascadia Code', 'Source Code Pro', monospace;
+    --max-width: 650px;
+    --line-height: 1.6;
+    --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Zero-JS Theme Logic via :has() */
+html:has(#theme-toggle-cb:checked) {
+    --bg-color: #0d0d0d;
+    --text-color: #e0e0e0;
+    --accent-color: #a0a0a0;
+}
+
+/* Fallback/Default system DARK preference if NO light override exists */
+@media (prefers-color-scheme: dark) {
+    html:not(:has(#theme-toggle-cb:checked)) {
+        --bg-color: #0d0d0d;
+        --text-color: #e0e0e0;
+        --accent-color: #a0a0a0;
+    }
+}
+
+/* Visually Hidden Checkbox */
+.vh {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-sans);
+    line-height: var(--line-height);
+    margin: 0;
+    padding: clamp(1.5rem, 5vw, 4rem) 1rem;
+    display: flex;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+main {
+    max-width: var(--max-width);
+    width: 100%;
+}
+
+.nav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    width: 48px;
+    height: 48px;
+    display: block;
+}
+
+.theme-toggle-label {
+    display: inline-block;
+    border: 1px solid var(--accent-color);
+    color: var(--text-color);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    transition: var(--transition);
+    border-radius: 4px;
+    user-select: none;
+}
+
+.theme-toggle-label:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+}
+
+/* Dynamic Label Text without JS */
+.theme-toggle-label::after {
+    content: "Dark";
+}
+
+html:has(#theme-toggle-cb:checked) .theme-toggle-label::after {
+    content: "Light";
+}
+
+h1 {
+    font-size: clamp(1.1rem, 4vw, 1.25rem);
+    font-weight: 600;
+    margin-bottom: 2rem;
+    line-height: 1.3;
+}
+
+p {
+    margin-bottom: 1.5rem;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+li {
+    margin-bottom: 0.75rem;
+    padding: 0.25rem 0;
+    transition: var(--transition);
+}
+
+li::before {
+    content: "→ ";
+    color: var(--accent-color);
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--accent-color);
+    margin: clamp(2rem, 8vw, 3rem) 0;
+    opacity: 0.2;
+}
+
+a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: var(--transition);
+}
+
+a:hover, a:active {
+    color: var(--accent-color);
+    background-color: rgba(128, 128, 128, 0.1);
+}
+
+#contact {
+    margin-top: 6rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
