@@ -1,41 +1,56 @@
 # Systems Engineering Presence Site
 
-A static-first, high-signal presence site built with minimalism and correctness in mind.
+A specialized presence site for high-assurance, mission-critical systems engineering. 
 
-## Core Features
-- **Static First**: Pure HTML/CSS for zero runtime cost and instant load.
-- **WASM Enhanced**: Minimal Rust module compiled to WASM for client-side logic (e.g., real-time checksums).
-- **Minimalist Design**: Responsive fluid typography, system-first aesthetics, and high signal-to-noise ratio.
-- **Zero Frameworks**: No JS application frameworks. No React. No Yew.
+**Deployed Live**: [kj114022.github.io/website/](https://kj114022.github.io/website/)
+
+## Philosophy
+*   **Zero-JS Architecture**: 100% deterministic rendering. No runtime variables, no client-side scripting risks, no dependency supply chain attacks.
+*   **Defense & Aerospace Focus**: Messaging tailored for adversarial environments, real-time systems (RTOS), and formal verification.
+*   **Correctness First**: Style and function are derived from constraints, not trends.
+
+## Features
+*   **Pure CSS Interactivity**:
+    *   Dark/Light theme toggle (using `:has()` and Checkbox Hack).
+    *   Accessible, logicless UI components.
+*   **Minimal Surface Area**:
+    *   No NPM dependencies.
+    *   No frontend frameworks.
+    *   No tracking or analytics.
+*   **Prototype Lab**: Includes `css-logic.html` demonstrating complex UI states (Modals, Tabs) without JavaScript.
 
 ## Tech Stack
-- **Rust**: Compiled to `wasm32-unknown-unknown`.
-- **Vanilla HTML/CSS**: Using Inter and IBM Plex Mono.
-- **Makefile**: For build automation.
-- **GitHub Actions**: For automated deployment to GitHub Pages.
+*   **HTML5 & CSS3**: Semantic markup and modern CSS variables.
+*   **Fonts**: Inter (UI) and IBM Plex Mono (Data), served locally.
+*   **GitHub Actions**: Automated, atomic deployment to GitHub Pages.
 
-## Development
+## Usage
 
-### Prerequisites
-- Rust and `wasm32-unknown-unknown` target.
-- `make`
+### Local Development
+The project requires only a standard Unix environment and Python 3 for previewing.
 
-### Local Build
 ```bash
+# Build the static site to site-dist/
 make build
-```
-The output is generated in `site-dist/`.
 
-### Local Preview
+# Clean artifacts
+make clean
+```
+
+### Preview
 ```bash
 python3 -m http.server 8000 --directory site-dist
 ```
 
-## Deployment to GitHub Pages
-
-1. **Repository**: [kj114022/website](https://github.com/kj114022/website)
-2. **Live Site**: [kj114022.github.io/website/](https://kj114022.github.io/website/)
-
-The site builds and deploys automatically via GitHub Actions.
-
-The site will automatically build and deploy whenever you push to `main`.
+## Structure
+```
+.
+├── site/               # Source Code
+│   ├── index.html      # Main Defense landing page
+│   ├── css-logic.html  # Zero-JS prototype lab
+│   ├── style.css       # Global high-contrast theme
+│   └── assets/         # Static binary assets (logos)
+├── site-dist/          # Build Output (Gitignored)
+├── .github/            # CD Pipeline
+└── rules.md            # Engineering Doctrine
+```
