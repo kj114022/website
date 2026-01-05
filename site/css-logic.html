@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Logicless Playground</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Playground Specific Styles */
+        body {
+            display: block; /* Override flex center for this demo page */
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .demo-section {
+            border: 1px solid var(--accent-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        h2 { font-size: 1.2rem; margin-bottom: 1rem; border-bottom: 1px solid var(--accent-color); padding-bottom: 0.5rem; }
+
+        /* --- 1. Pure CSS Tabs --- */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .tab-input {
+            display: none;
+        }
+
+        .tab-label {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            opacity: 0.6;
+        }
+
+        .tab-content {
+            display: none;
+            width: 100%;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(128, 128, 128, 0.05);
+            border-radius: 4px;
+        }
+
+        /* Logic: check input -> highlight label + show content */
+        .tab-input:checked + .tab-label {
+            opacity: 1;
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        /* We need :has() or strictly ordered siblings for content. 
+           Here we use ID mapping or just sibling order. 
+           Let's use the layout trick: Flexbox `order`. */  
+        #tab1:checked ~ .content-1,
+        #tab2:checked ~ .content-2,
+        #tab3:checked ~ .content-3 {
+            display: block;
+        }
+
+        /* --- 2. HTML5 Accordion (No CSS needed really) --- */
+        details {
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 0.8rem;
+            cursor: pointer;
+            background: rgba(128, 128, 128, 0.05);
+            font-weight: 600;
+            list-style: none; /* Hide default triangle */
+        }
+        
+        summary::after {
+            content: "+";
+            float: right; 
+        }
+
+        details[open] summary::after {
+            content: "-";
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid var(--accent-color);
+        }
+
+        .details-body {
+            padding: 1rem;
+        }
+
+        /* --- 3. Pure CSS Modal --- */
+        .modal-toggle {
+            display: none;
+        }
+
+        .modal-btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: var(--text-color);
+            color: var(--bg-color);
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Logic: Checked -> Show Modal */
+        .modal-toggle:checked ~ .modal-overlay {
+            display: flex;
+        }
+
+        .modal-card {
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="nav-header">
+        <h1>Zero-JS Logic Lab</h1>
+        <a href="index.html">← Back to Home</a>
+    </header>
+
+    <!-- Tabs Demo -->
+    <section class="demo-section">
+        <h2>1. Pure CSS Tabs</h2>
+        <div class="tabs">
+            <input type="radio" name="tabs" id="tab1" class="tab-input" checked>
+            <label for="tab1" class="tab-label">Systems</label>
+            
+            <input type="radio" name="tabs" id="tab2" class="tab-input">
+            <label for="tab2" class="tab-label">Performance</label>
+            
+            <input type="radio" name="tabs" id="tab3" class="tab-input">
+            <label for="tab3" class="tab-label">Security</label>
+
+            <!-- Contents must be siblings for the sibling combinator to work in this simple pattern -->
+            <div class="tab-content content-1">
+                <strong>Systems Engineering</strong><br>
+                Focus on the hardware-software interface, memory models, and deterministic execution.
+            </div>
+            <div class="tab-content content-2">
+                <strong>Performance Optimization</strong><br>
+                Zero-cost abstractions, cache locality, and removing runtime overhead.
+            </div>
+            <div class="tab-content content-3">
+                <strong>Security Foundations</strong><br>
+                Memory safety, formal verification, and minimizing attack surfaces.
+            </div>
+        </div>
+    </section>
+
+    <!-- Accordion Demo -->
+    <section class="demo-section">
+        <h2>2. HTML5 Native Accordion</h2>
+        <details>
+            <summary>Why No JavaScript?</summary>
+            <div class="details-body">
+                JavaScript introduces runtime state, performance variability, and security risks. Removing it forces architectural simplicity.
+            </div>
+        </details>
+        <details>
+            <summary>What is Determinism?</summary>
+            <div class="details-body">
+                A property where the same initial state and inputs always produce the same outputs. Essential for reliable systems.
+            </div>
+        </details>
+    </section>
+
+    <!-- Modal Demo -->
+    <section class="demo-section">
+        <h2>3. Pure CSS Modal</h2>
+        
+        <label for="modal-toggle" class="modal-btn">Open Zero-JS Modal</label>
+        
+        <!-- Hidden Checkbox that controls state -->
+        <input type="checkbox" id="modal-toggle" class="modal-toggle">
+        
+        <!-- Overlay (Sibling to checkbox) -->
+        <div class="modal-overlay">
+            <div class="modal-card">
+                <h3>State Managed by CSS</h3>
+                <p>This modal's visibility is controlled by a hidden checkbox and the sibling <code>~</code> combinator.</p>
+                <p>No event listeners. No z-index fights. Just declarative state.</p>
+                <br>
+                <label for="modal-toggle" class="modal-btn">Close Modal</label>
+                <label for="modal-toggle" class="close-btn">✕</label>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
