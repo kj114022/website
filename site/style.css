@@ -147,12 +147,13 @@ main {
 html:has(#theme-toggle-cb:checked) .theme-toggle-label::after { content: "Light"; }
 
 /* ===========================================
-   HERO - Bold statement
+   HERO - Bold statement, centered
    =========================================== */
 #hero {
     margin-bottom: var(--s-6);
     padding-bottom: var(--s-6);
     border-bottom: 1px solid var(--border);
+    text-align: center;
 }
 
 #hero h2 {
@@ -167,6 +168,8 @@ html:has(#theme-toggle-cb:checked) .theme-toggle-label::after { content: "Light"
     font-size: var(--f-base);
     color: var(--muted);
     line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto;
 }
 
 /* ===========================================
