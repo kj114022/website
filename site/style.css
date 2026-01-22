@@ -26,14 +26,14 @@
     /* Layout */
     --max-w: 640px;
     
-    /* Light Theme - French Blue & Gray */
-    --bg: #f8f9fa;
-    --fg: #1a1a2e;
-    --muted: #5c6470;
+    /* Light Theme - Premium Pearl White (Bugatti-inspired) */
+    --bg: #fdfcfa;          /* Warm pearl white */
+    --fg: #1a1a1a;          /* Rich charcoal */
+    --muted: #6b6b6b;       /* Warm gray */
     --accent: #0055A4;      /* French Blue */
     --accent-muted: #4a7fb8;
-    --border: #dce1e8;
-    --subtle: #eef1f5;
+    --border: #e8e6e3;      /* Warm ivory border */
+    --subtle: #f5f4f2;      /* Soft ivory */
     
     /* Typography */
     --sans: 'Inter', system-ui, sans-serif;
@@ -44,26 +44,26 @@
     --duration: 0.2s;
 }
 
-/* Dark Theme - French Blue & Gray */
+/* Dark Theme - Premium Matte Black (Automotive-inspired) */
 html:has(#theme-toggle-cb:checked) {
-    --bg: #0d0d14;
-    --fg: #e8eaed;
-    --muted: #9aa0ab;
-    --accent: #5b9bd5;      /* Lighter French Blue for dark mode */
-    --accent-muted: #4a7fb8;
-    --border: #2a2d35;
-    --subtle: #16161f;
+    --bg: #121212;          /* Matte black */
+    --fg: #f5f5f5;          /* Soft white */
+    --muted: #8a8a8a;       /* Warm gray */
+    --accent: #6ba3d6;      /* Lighter French Blue for dark mode */
+    --accent-muted: #5b9bd5;
+    --border: #2a2a2a;      /* Matte charcoal */
+    --subtle: #1a1a1a;      /* Deep matte */
 }
 
 @media (prefers-color-scheme: dark) {
     html:not(:has(#theme-toggle-cb:checked)) {
-        --bg: #0d0d14;
-        --fg: #e8eaed;
-        --muted: #9aa0ab;
-        --accent: #5b9bd5;
-        --accent-muted: #4a7fb8;
-        --border: #2a2d35;
-        --subtle: #16161f;
+        --bg: #121212;
+        --fg: #f5f5f5;
+        --muted: #8a8a8a;
+        --accent: #6ba3d6;
+        --accent-muted: #5b9bd5;
+        --border: #2a2a2a;
+        --subtle: #1a1a1a;
     }
 }
 
