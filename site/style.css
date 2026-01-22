@@ -223,6 +223,7 @@ li {
     position: relative;
     border-bottom: 1px solid var(--subtle);
     color: var(--muted);
+    transition: transform var(--duration) var(--ease), color var(--duration) var(--ease);
 }
 
 li:last-child {
@@ -246,14 +247,19 @@ li:hover::before {
     background: var(--accent);
 }
 
+li:hover {
+    transform: translateX(4px);
+    color: var(--fg);
+}
+
 /* ===========================================
-   LINKS - Subtle underline
+   LINKS - Subtle underline with animation
    =========================================== */
 a {
     color: inherit;
     text-decoration: none;
     border-bottom: 1px solid var(--border);
-    transition: border-color var(--duration) var(--ease);
+    transition: all var(--duration) var(--ease);
 }
 
 a:hover {
