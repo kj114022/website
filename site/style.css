@@ -123,28 +123,42 @@ main {
     letter-spacing: -0.03em;
 }
 
-.theme-toggle-label {
-    font-family: var(--mono);
-    font-size: var(--f-xs);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    padding: var(--s-1) var(--s-2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
+/* Theme toggle - fixed top-right */
+.theme-toggle {
+    position: fixed;
+    top: var(--s-3);
+    right: var(--s-3);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: all var(--duration) var(--ease);
-    margin-top: var(--s-1);
+    color: var(--muted);
+    transition: color var(--duration) var(--ease);
+    z-index: 100;
 }
 
-.theme-toggle-label:hover {
+.theme-toggle:hover {
     color: var(--fg);
-    border-color: var(--fg);
 }
 
-.theme-toggle-label::after { content: "Dark"; }
-html:has(#theme-toggle-cb:checked) .theme-toggle-label::after { content: "Light"; }
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Show moon in light mode, sun in dark mode */
+.icon-sun { display: none; }
+.icon-moon { display: block; }
+
+html:has(#theme-toggle-cb:checked) .icon-sun { display: block; }
+html:has(#theme-toggle-cb:checked) .icon-moon { display: none; }
+
+@media (prefers-color-scheme: dark) {
+    html:not(:has(#theme-toggle-cb:checked)) .icon-sun { display: block; }
+    html:not(:has(#theme-toggle-cb:checked)) .icon-moon { display: none; }
+}
 
 /* ===========================================
    HERO - Bold statement, centered
@@ -180,12 +194,10 @@ section {
 }
 
 section h2 {
-    font-family: var(--mono);
-    font-size: var(--f-xs);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--muted);
+    font-size: var(--f-md);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--fg);
     margin-bottom: var(--s-3);
 }
 
@@ -205,11 +217,12 @@ ul {
 }
 
 li {
-    font-size: var(--f-base);
+    font-size: var(--f-sm);
     padding: var(--s-1) 0;
     padding-left: var(--s-3);
     position: relative;
     border-bottom: 1px solid var(--subtle);
+    color: var(--muted);
 }
 
 li:last-child {
